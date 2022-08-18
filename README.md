@@ -1,8 +1,14 @@
 # Sklearn-Model
-Building a Logistic Regression Model with Sklearn
+
+# Build a Logistic Regression Model with Scikit-learn?
+# 
+Scikit-learn is one of the best documented Python modules out there. You can find lots of code samples at scikit-learn.org
+
 import pandas as pd 
+
 df = pd.read_csv("C:/Users/kepohin/OneDrive/titanic.csv")
 df.head()
+
 # Prep Data with Pandas
 
 df['male'] = df['Sex'] == 'male'
@@ -16,7 +22,7 @@ print(x)
 y = df['Survived'].values
 print(y)
 
-# Build a Logistic Regression Model with Sklearn
+#Build a Logistic Regression Model with Sklearn
 
 # We start by importing the Logistic Regression model: all sklearn are built as classes
 
@@ -32,7 +38,8 @@ y = df['Survived'].values
 
 model.fit(x, y)
 
-# Make Predictions with the Model
+
+# # Make Predictions with the Model
 
 x = df[['Pclass', 'male', 'Age', 'Siblings/Spouses', 'Parents/Children', 'Fare']].values
 y = df['Survived'].values
@@ -42,13 +49,14 @@ model.fit(x, y)
 
 # Now we can use the predict method to make predictions.
 model.predict(x)
-df.head()
+
 # The first passenger in the dataset is:[3, True, 22.0, 1, 0, 7.25]This means the passenger is in Pclass 3, are male, are 22 years old, have 1 sibling/spouse aboard, 0 parents/child aboard, and paid $7.25. Let’s see what the model predicts for this passenger. Note that even with one datapoint, the predict method takes a 2-dimensional numpy array and returns a 1-dimensional numpy array.
 
 # 0
 print(model.predict([[3, True, 22.0, 1, 0, 7.25]]))
 
-#array([0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0,......])# Conclusion:
+#array([0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0,......])
+# Conclusion:
 The result is 0, which means the model predicts that this passenger did not survive.
 
 # 1
@@ -60,36 +68,27 @@ The result is 1, which means the model predicts that this passenger did survive.
 
 print(model.predict(x[:5]))
 
-# # Score the Model
-
 # Score the Model
+
+# #Score the Model
 # We can get a sense of how good our model is by counting the number of datapoints it predicts correctly. This is called the accuracy score.
 
 # Let’s create an array that has the predicted y values.
+
 y_pred = model.predict(x)
 
-# Now we create an array of boolean values of whether or not our model predicted each passenger correctly.
-# y == y_pred
+
+# # Now we create an array of boolean values of whether or not our model predicted each passenger correctly.
+ y == y_pred
 
 # To get the number of these that are true, we can use the numpy sum method.
 print((y == y_pred).sum())
+
 # This means that of the 887 datapoints, the model makes the correct prediction for 714 of them.
-#
+
 # To get the percent correct, we divide this by the total number of passengers. We get the total number of passengers using the shape attribute.
 y.shape[0]
 
 print((y == y_pred).sum() / y.shape[0])
 
-
-# # Score the Model: Exercise
-# Assume that y=[0, 0, 0, 1, 1] and the result of model.predict(X) is [0, 0, 1, 1, 0]. What is the expected output of the following code?
-#
-# model.score(X, y)
-from sklearn.metrics import accuracy_score
-# True class
-y = [0, 0, 0, 1, 1] 
-# Predicted class
-y_hat = [0, 0, 1, 1, 0]
-accuracy_score(y, y_hat)
-
-
+# the percent correct score is 80%
